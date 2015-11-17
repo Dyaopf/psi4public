@@ -121,7 +121,7 @@ SharedMatrix ExternalPotential::computePotentialMatrix(shared_ptr<BasisSet> basi
     V_charge.reset();
     pot.reset();
 
-    // Diffuse Bases
+    // Diffuse charge bases
     for (size_t ind = 0; ind < bases_.size(); ind++) {
 
         boost::shared_ptr<BasisSet> aux = bases_[ind].first;
