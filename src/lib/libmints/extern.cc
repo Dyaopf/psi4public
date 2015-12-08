@@ -50,6 +50,7 @@ void ExternalPotential::clear()
 {
     charges_.clear();
     bases_.clear();
+    exchanges_.clear();
 }
 void ExternalPotential::addCharge(double Z, double x, double y, double z)
 {
@@ -58,6 +59,10 @@ void ExternalPotential::addCharge(double Z, double x, double y, double z)
 void ExternalPotential::addBasis(boost::shared_ptr<BasisSet> basis, SharedVector coefs)
 {
     bases_.push_back(std::make_pair(basis, coefs));
+}
+void ExternalPotential::addExchange(boost::shared_ptr<BasisSet> basis, SharedVector coefs)
+{
+    exchanges_.push_back(std::make_pair(basis, coefs));
 }
 void ExternalPotential::print(std::string out) const
 {
@@ -87,6 +92,21 @@ void ExternalPotential::print(std::string out) const
             if (print_ > 2) {
                 printer->Printf( "    Density Coefficients %d\n\n", i+1);
                 bases_[i].second->print();
+            }
+        }
+    }
+
+    // Exchange functions
+    if (exchanges_.size()) {
+        printer->Printf( "    > Diffuse Bases (exchange) < \n\n");
+        for (size_t i = 0; i < bases_.size(); i++) {
+            printer->Printf( "    Molecule %d\n\n", i+1);
+            exchanges_[i].first->molecule()->print();
+            printer->Printf( "    Basis %d\n\n", i+1);
+            exchanges_[i].first->print_by_level(out, print_);
+            if (print_ > 2) {
+                printer->Printf( "    Density Coefficients %d\n\n", i+1);
+                exchanges_[i].second->print();
             }
         }
     }
@@ -159,6 +179,9 @@ SharedMatrix ExternalPotential::computePotentialMatrix(shared_ptr<BasisSet> basi
             }
         }
     }
+
+    // Diffuse exchange functions
+
 
     return V;
 }

@@ -56,6 +56,8 @@ protected:
     std::vector<boost::tuple<double,double,double,double> > charges_;
     /// Auxiliary basis sets (with accompanying molecules and coefs) of diffuse charges
     std::vector<std::pair<boost::shared_ptr<BasisSet>, SharedVector> > bases_;
+    /// Auxiliary basis sets (with accompanying molecules and coefs) for overlap exchange
+    std::vector<std::pair<boost::shared_ptr<BasisSet>, SharedVector> > exchanges_;
 
 public:
     /// Constructur, does nothing
@@ -70,6 +72,8 @@ public:
     void addCharge(double Z,double x, double y, double z);
     /// Add a basis of S auxiliary functions with DF coefficients
     void addBasis(boost::shared_ptr<BasisSet> basis, SharedVector coefs);
+    /// Add a basis of exchange auxiliary functions with DF coefficients
+    void addExchange(boost::shared_ptr<BasisSet> basis, SharedVector coefs);
 
     /// Reset the field to zero (eliminates all entries)
     void clear();

@@ -26,9 +26,7 @@
 #
 
 """Module with classes to integrate MM charges into
-a QM calculation.
-
-"""
+a QM calculation."""
 from __future__ import absolute_import
 import re
 import os
