@@ -63,13 +63,13 @@ protected:
     /// Vector of Sphericaltransforms
     std::vector<SphericalTransform> st_;
 
-    /// Whether or not to activate the PyBuffer 
+    /// Whether or not to activate the PyBuffer
     bool enable_pybuffer_;
 
     void compute_pair(const GaussianShell& s1,
                       const GaussianShell& s2,
                       const GaussianShell& s3);
-    
+
     /// The PyBuffer object used for sharing the target_ buffer without copying data
     PyBuffer<double> pybuffer_;
 

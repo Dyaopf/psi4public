@@ -181,8 +181,43 @@ SharedMatrix ExternalPotential::computePotentialMatrix(shared_ptr<BasisSet> basi
     }
 
     // Diffuse exchange functions
+    for (size_t ind = 0; ind < exchanges_.size(); ind++) {
 
-    
+        boost::shared_ptr<BasisSet> aux = exchanges_[ind].first;
+        SharedVector d = exchanges_[ind].second;
+
+        // TODO thread this
+        boost::shared_ptr<IntegralFactory> fact2(new IntegralFactory(aux,BasisSet::zero_ao_basis_set(), basis, basis));
+        boost::shared_ptr<ThreeCenterOverlapInt> ovlp(fact2->overlap_3c());
+
+        const double* buffer = ovlp->buffer();
+
+        double** Vp = V->pointer();
+        double*  dp = d->pointer();
+
+        for (int Q = 0; Q < aux->nshell(); Q++) {
+            for (int M = 0; M < basis->nshell(); M++) {
+                for (int N = 0; N < basis->nshell(); N++) {
+                    int numQ = aux->shell(Q).nfunction();
+                    int numM = basis->shell(M).nfunction();
+                    int numN = basis->shell(N).nfunction();
+                    int Qstart = aux->shell(Q).function_index();
+                    int Mstart = basis->shell(M).function_index();
+                    int Nstart = basis->shell(N).function_index();
+
+                    ovlp->compute_shell(Q,M,N);
+
+                    for (int oq = 0, index = 0; oq < numQ; oq++) {
+                        for (int om = 0; om < numM; om++) {
+                            for (int on = 0; on < numN; on++, index++) {
+                                Vp[om + Mstart][on + Nstart] += dp[oq + Qstart] * buffer[index];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     return V;
 }

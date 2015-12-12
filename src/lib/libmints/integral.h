@@ -425,7 +425,7 @@ public:
     /// Returns an OneBodyInt that computes the overlap integral.
     virtual OneBodySOInt* so_overlap(int deriv=0);
 
-    /// Returns a ThreeCenterOverlapINt that computes the overlap between three centers
+    /// Returns a ThreeCenterOverlapInt that computes the overlap between three centers
     virtual ThreeCenterOverlapInt* overlap_3c();
 
     /// Returns an OneBodyInt that computes the kinetic energy integral.

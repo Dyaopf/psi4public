@@ -109,9 +109,9 @@ class Diffuse(object):
         self.da.scale(2.0)
 
     def populateExtern(self, extern):
-        # Electronic Part
+        # Electronic part
         extern.addBasis(self.ribasis, self.da)
-        # Nuclear Part
+        # Nuclear part
         for A in range(0, self.molecule.natom()):
             extern.addCharge(self.molecule.Z(A), self.molecule.x(A), self.molecule.y(A), self.molecule.z(A))
 
