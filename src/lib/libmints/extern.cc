@@ -226,7 +226,7 @@ SharedMatrix ExternalPotential::computePotentialMatrix(shared_ptr<BasisSet> basi
 SharedMatrix ExternalPotential::computePotentialGradients(shared_ptr<BasisSet> basis, shared_ptr<Matrix> Dt)
 {
     // This will be easy to implement, I think, but just throw for now.
-    if(bases_.size())
+    if ((bases_.size()+exchanges_.size()) > 0)
         throw PSIEXCEPTION("Gradients with blurred external charges are not implemented yet.");
 
     SharedMolecule mol = basis->molecule();
