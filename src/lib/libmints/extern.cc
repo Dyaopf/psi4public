@@ -187,7 +187,7 @@ SharedMatrix ExternalPotential::computePotentialMatrix(shared_ptr<BasisSet> basi
         SharedVector d = exchanges_[ind].second;
 
         // TODO thread this
-        boost::shared_ptr<IntegralFactory> fact2(new IntegralFactory(aux,BasisSet::zero_ao_basis_set(), basis, basis));
+        boost::shared_ptr<IntegralFactory> fact2(new IntegralFactory(aux, basis, basis, BasisSet::zero_ao_basis_set()));
         boost::shared_ptr<ThreeCenterOverlapInt> ovlp(fact2->overlap_3c());
 
         const double* buffer = ovlp->buffer();

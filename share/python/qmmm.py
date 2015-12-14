@@ -233,10 +233,14 @@ class QMMM(object):
             s = s + '    %11.7f %11.3E %11.3E %11.3E\n' % (self.charges[k][0], self.charges[k][1], self.charges[k][2], self.charges[k][3])
         s = s + '\n'
 
-        s = s + '    => Diffuses <=\n\n'
-
+        s = s + '    => Diffuse charge functions <=\n\n'
         for k in range(0, len(self.diffuses)):
             s = s + str(self.diffuses[k])
+        s = s + '\n'
+
+        s = s + '    => Diffuse exchange functions <=\n\n'
+        for k in range(0, len(self.exchanges)):
+            s = s + str(self.exchanges[k])
 
         return s
 
