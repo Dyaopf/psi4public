@@ -254,5 +254,5 @@ class QMMM(object):
         for diffuse in self.diffuses:
             diffuse.populateExtern(self.extern)
         # Exchange functions
-        for exchange in self.exchanges
+        for exchange in self.exchanges:
             exchange.populateExtern(self.extern)

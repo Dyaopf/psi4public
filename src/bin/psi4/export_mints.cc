@@ -863,6 +863,7 @@ void export_mints()
             def("setName", &ExternalPotential::setName, "docstring").
             def("addCharge", &ExternalPotential::addCharge, "docstring").
             def("addBasis", &ExternalPotential::addBasis, "docstring").
+            def("addExchange", &ExternalPotential::addExchange, "docstring").
             def("clear", &ExternalPotential::clear, "docstring").
             def("computePotentialMatrix", &ExternalPotential::computePotentialMatrix, "docstring").
             def("print_out", &ExternalPotential::py_print, "docstring");
